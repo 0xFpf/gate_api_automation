@@ -1,5 +1,4 @@
-#gate_api_automation
-
+# gate_api_automation
 I was commissioned to make an executable with GUI that runs at a commercial venue and controls a specific gate on the network.
 
 The purpose of the program is to allow customers to scan their ID on a barcode reader, for that ID to then be processed with an API through their internal backend system and sign them in, as well as make another HTTPS api call opening the gates.
