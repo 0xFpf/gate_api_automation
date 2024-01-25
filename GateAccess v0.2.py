@@ -15,7 +15,7 @@ def main():
         entryresult=user_access(user_input)
         if entryresult['ArrivalAdded']:
             open_gates()
-        response_listbox.insert(tk.END, current_time+user_input+"  "+entryresult)
+        response_listbox.insert(tk.END, current_time+user_input+"  "+str(entryresult))
         response_listbox.yview(tk.END)
 
         id_entry.delete(0, tk.END)
@@ -26,13 +26,14 @@ def main():
 
 def user_access(user_input):
     url = 'https://api.com/add_customer_arrival'
-    response = requests.post('privatekey.json')
+    response = requests.post('https://address_for_dynamic_key.com/key.json')
     authorization=response.json()
     auth_key=authorization['AccessToken']
 
     headers = {
         'API-Key': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
         'Accept': 'application/json',
+        'Site': '1234',
         'Content-Type': 'application/json',
         'authorization': auth_key,
     }
@@ -40,6 +41,7 @@ def user_access(user_input):
     data = {
         'CustomerId': user_input,
         'LocationId': 3,
+        'RegisterAccessId': 123,
         'Test': False,
     }
     try:
@@ -131,6 +133,8 @@ def create_gui():
     # Make the response window always cover the entire bottom half of the GUI
     root.grid_columnconfigure(0, weight=1)
     root.grid_rowconfigure(3, weight=1)
+    # Enabled as client wants the program always-on 
+    root.after(2000, startButton.invoke)
 
     # Schedule the script reset every 24 hours (86400000 milliseconds)
     root.after(86400000, reset_script)
